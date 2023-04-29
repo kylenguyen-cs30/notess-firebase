@@ -1,0 +1,82 @@
+/* index page  */
+
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+        monospace;
+}
+
+
+h1 {
+    padding: 15px;
+    text-align: center;
+}
+
+
+.note-text {
+    border: none;
+    resize: none;
+    height: 200px;
+    box-shadow: 0 0 7px rgba(0, 0, 0, 0.15);
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 16px;
+
+}
+
+#app {
+
+    overflow: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 200px);
+    padding: 20px;
+    gap: 20px;
+
+}
+
+.add-note {
+    height: 200px;
+
+    border: none;
+    outline: none;
+
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    font-size: 100px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.add-note:hover {
+    background: rgba(0, 0, 0, 0.2);
+
+}
+
+.note-tag {
+    position: absolute;
+    /* position the tag relative to the note */
+    top: 200px;
+    /* adjust the top and left values as needed */
+    left: 60px;
+    background-color: #f2f2f2;
+    color: #333;
+    font-size: 12px;
+    padding: 3px 6px;
+    border-radius: 5px;
+}
+
+.btn {
+    height: 2rem;
+    margin-left: 9px;
+    padding: 5px;
+} 
