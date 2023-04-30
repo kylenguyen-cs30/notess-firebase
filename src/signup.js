@@ -36,6 +36,7 @@ function addNewUser(e) {
             const user = userCredential.user;
             console.log('user created:', user);
             signupForm.reset();
+            window.location.replace("index.html");
             // ...
         })
         .catch((error) => {
