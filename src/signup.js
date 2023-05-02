@@ -4,6 +4,12 @@ import {
     createUserWithEmailAndPassword
 } from 'firebase/auth';
 
+import { 
+    getFirestore,
+    doc,
+    setDoc
+ } from "firebase/firestore";
+
 
 const firebaseConfig = {
     apiKey: "AIzaSyANBu3OWFN0Vd6kT57K2IYyNH-zb1JaZ7Q",
@@ -16,33 +22,66 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
-const auth = getAuth();
+const auth = getAuth(); //user authentication
+const db = getFirestore(); //database
+
 
 
 //signup new user
 const submitButton = document.getElementById('submit-signup');
 const signupForm = document.querySelector('.signup');
 submitButton.addEventListener('click', addNewUser);
-function addNewUser(e) {
+
+
+// async function addNewUser(e) {
+//     e.preventDefault();
+//     console.log("button is clicked");
+
+//     const email = document.getElementById('inputEmail').value;
+//     const password = document.getElementById('inputPassword').value;
+
+//     createUserWithEmailAndPassword(auth, email, password)
+//         .then((userCredential) => {
+//             // Signed in 
+//             const user = userCredential.user;
+//             console.log('user created:', user);
+//             signupForm.reset();
+//             window.location.replace("index.html");
+//             // ...
+//         })
+//         .catch((error) => {
+//             const errorCode = error.code;
+//             const errorMessage = error.message;
+//             console.log(errorCode, errorMessage);
+//             // ..
+//         });
+// }
+
+
+async function addNewUser(e) {
     e.preventDefault();
     console.log("button is clicked");
 
     const email = document.getElementById('inputEmail').value;
     const password = document.getElementById('inputPassword').value;
 
-    createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            // Signed in 
-            const user = userCredential.user;
-            console.log('user created:', user);
-            signupForm.reset();
-            window.location.replace("index.html");
-            // ...
-        })
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.log(errorCode, errorMessage);
-            // ..
-        });
+    try {
+        //create user in firebase auth
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+        console.log('user created:', user);
+
+        //create user in firestore
+        const notesRef = doc(db, "users", user.uid);
+        await setDoc(notesRef, { notes : [] });
+
+        //reset form and redirect to index.html
+        signupForm.reset();
+        window.location.replace("index.html");
+        
+    } catch (error) {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+    }
 }

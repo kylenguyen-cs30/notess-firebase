@@ -12,7 +12,10 @@ module.exports = {
 		path: path.resolve(__dirname, 'dist'),
 		filename: '[name].bundle.js'
 	},
-	watch: true
+	watch: true,
+	experiments: {
+		topLevelAwait: true
+	}
 }
 
 // module.exports = {
