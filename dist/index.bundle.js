@@ -64,9 +64,9 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
-/***/ ((module, __webpack_exports__, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {\n__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! firebase/app */ \"./node_modules/firebase/app/dist/esm/index.esm.js\");\n/* harmony import */ var firebase_firestore__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! firebase/firestore */ \"./node_modules/firebase/firestore/dist/esm/index.esm.js\");\n/* harmony import */ var firebase_auth__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! firebase/auth */ \"./node_modules/firebase/auth/dist/esm/index.esm.js\");\n\n\n\n\n\nconst firebaseConfig = {\n    apiKey: \"AIzaSyANBu3OWFN0Vd6kT57K2IYyNH-zb1JaZ7Q\",\n    authDomain: \"notess-v2.firebaseapp.com\",\n    projectId: \"notess-v2\",\n    storageBucket: \"notess-v2.appspot.com\",\n    messagingSenderId: \"999128000486\",\n    appId: \"1:999128000486:web:91b7bf69f81d0b7fa65827\"\n};\n\nconst app = (0,firebase_app__WEBPACK_IMPORTED_MODULE_0__.initializeApp)(firebaseConfig);\nconst db = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getFirestore)(app);\nconst auth = (0,firebase_auth__WEBPACK_IMPORTED_MODULE_2__.getAuth)(app);\n//welcome message\nconst user = auth.currentUser;\n\nif (user) {\n    // User is signed in.\n    console.log(\"user is signed in\");\n    const userId = user.uid;\n    const userRef = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.collection)(db, \"users\");\n    const querySnapshot = await (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getDocs)(userRef);\n    const users = querySnapshot.docs.map((doc) => doc.data());\n    const userName = userData?.user_name ?? '';\n\n\n    //Insert the user name into the welcome message\n    const userNameElement = document.getElementById(\"user-name\");\n    userNameElement.innerText = ' ${userName?? \"\"}';\n\n}\n\n\n\n\n\n\n\n\nconst notesContainer = document.getElementById(\"app\");\nconst addNoteButt = notesContainer.querySelector(\".add-note\");\nconst input = document.getElementById(\"search_input\");\n\n\ninput.addEventListener(\"input\", () => searchFor(input));\naddNoteButt.addEventListener(\"click\", () => addNote());\n\n\nfunction searchFor(input) {\n  const searchQuery = input.value.toLowerCase();\n  notesRef.once(\"value\", (snapshot) => {\n    const notes = snapshot.val();\n    const filteredNotes = Object.values(notes || {})\n      .filter((note) => note.content.toLowerCase().includes(searchQuery));\n    displayNotes(filteredNotes);\n  });\n}\n\n\nfunction displayNotes(notes) {\n  notesContainer.innerHTML = \"\";\n  Object.values(notes || {}).forEach((note) => {\n    const noteElement = createNoteElement(note.id, note.content);\n    notesContainer.appendChild(noteElement);\n  });\n  //Display all searched notes then add note button \n  notesContainer.appendChild(addNoteButt);\n}\n\n\n//This loads in the notes from Firebase\nnotesRef.on(\"value\", (snapshot) => {\n  const notes = snapshot.val();\n  displayNotes(notes);\n});\n\n\nfunction createNoteElement(id, content) {\n  const element = document.createElement(\"textarea\");\n  element.classList.add(\"note-text\");\n  element.value = content;\n  element.placeholder = \"Empty note\";\n  element.style.marginBottom = \"10px\";\n\n  element.addEventListener(\"change\", () => {\n    updateNote(id, element.value);\n  });\n\n  element.addEventListener(\"dblclick\", () => {\n    const doDelete = confirm(\"Are you sure you want to delete?\");\n\n    if (doDelete) {\n      deleteNote(id, element);\n    }\n  });\n  return element;\n}\n\n\nfunction updateNote(id, newContent) {\n  const noteRef = notesRef.child(id);\n  noteRef.update({ content: newContent });\n}\n\n\nfunction deleteNote(id, element) {\n  const noteRef = notesRef.child(id);\n  noteRef.remove();\n  notesContainer.removeChild(element);\n}\n\n\nfunction addNote() {\n  const noteObject = {\n    id: Math.floor(Math.random() * 100000),\n    content: \"\"\n  };\n  const noteRef = notesRef.child(noteObject.id);\n  noteRef.set(noteObject);\n  const noteElement = createNoteElement(noteObject.id, noteObject.content);\n  notesContainer.insertBefore(noteElement, addNoteButt);\n}\n__webpack_async_result__();\n} catch(e) { __webpack_async_result__(e); } }, 1);\n\n//# sourceURL=webpack://notess/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! firebase/app */ \"./node_modules/firebase/app/dist/esm/index.esm.js\");\n/* harmony import */ var firebase_firestore__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! firebase/firestore */ \"./node_modules/firebase/firestore/dist/esm/index.esm.js\");\n/* harmony import */ var firebase_auth__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! firebase/auth */ \"./node_modules/firebase/auth/dist/esm/index.esm.js\");\n\n\n\n\n\nconst firebaseConfig = {\n  apiKey: \"AIzaSyANBu3OWFN0Vd6kT57K2IYyNH-zb1JaZ7Q\",\n  authDomain: \"notess-v2.firebaseapp.com\",\n  projectId: \"notess-v2\",\n  storageBucket: \"notess-v2.appspot.com\",\n  messagingSenderId: \"999128000486\",\n  appId: \"1:999128000486:web:91b7bf69f81d0b7fa65827\"\n};\n\nconst app = (0,firebase_app__WEBPACK_IMPORTED_MODULE_0__.initializeApp)(firebaseConfig);\nconst db = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getFirestore)(app);\nconst auth = (0,firebase_auth__WEBPACK_IMPORTED_MODULE_2__.getAuth)(app);\n//welcome message\nconst user = auth.currentUser;\n\n\nauth.onAuthStateChanged(async (user) => {\n  if (user) {\n    console.log(\"user is signed in\");\n    const userId = user.uid;\n    const userRef = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.collection)(db, \"users\");\n    const querySnapshot = await (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getDocs)(userRef);\n    const users = querySnapshot.docs.map((doc) => doc.data());\n    const userEmail = user.email ?? \"\";\n\n    // Insert the user email into the welcome message\n    const userNameElement = document.getElementById(\"user-name\");\n    userNameElement.innerText = ` ${userEmail}`;\n  } else {\n    console.log(\"user is not signed in\");\n  }\n});\n\n\n\nconst notesContainer = document.getElementById(\"app\");\nconst addNoteButt = notesContainer.querySelector(\".add-note\");\nconst input = document.getElementById(\"search_input\");\n\n\ninput.addEventListener(\"input\", () => searchFor(input));\naddNoteButt.addEventListener(\"click\", () => addNote());\n\n//This is the path to the database\nfunction searchFor(input) {\n  const searchQuery = input.value.toLowerCase();\n  notesRef.once(\"value\", (snapshot) => {\n    const notes = snapshot.val();\n    const filteredNotes = Object.values(notes || {})\n      .filter((note) => note.content.toLowerCase().includes(searchQuery));\n    displayNotes(filteredNotes);\n  });\n}\n\n\nfunction displayNotes(notes) {\n  notesContainer.innerHTML = \"\";\n  Object.values(notes || {}).forEach((note) => {\n    const noteElement = createNoteElement(note.id, note.content);\n    notesContainer.appendChild(noteElement);\n  });\n  //Display all searched notes then add note button \n  notesContainer.appendChild(addNoteButt);\n}\n\n\n//This loads in the notes from Firebase\n// notesRef.on(\"value\", (snapshot) => {\n//   const notes = snapshot.val();\n//   displayNotes(notes);\n// });\n\n\nfunction createNoteElement(id, content) {\n  const element = document.createElement(\"textarea\");\n  element.classList.add(\"note-text\");\n  element.value = content;\n  element.placeholder = \"Empty note\";\n  element.style.marginBottom = \"10px\";\n\n  element.addEventListener(\"change\", () => {\n    updateNote(id, element.value);\n  });\n\n  element.addEventListener(\"dblclick\", () => {\n    const doDelete = confirm(\"Are you sure you want to delete?\");\n\n    if (doDelete) {\n      deleteNote(id, element);\n    }\n  });\n  return element;\n}\n\n\nfunction updateNote(id, newContent) {\n  const noteRef = notesRef.child(id);\n  noteRef.update({ content: newContent });\n}\n\n\nfunction deleteNote(id, element) {\n  const noteRef = notesRef.child(id);\n  noteRef.remove();\n  notesContainer.removeChild(element);\n}\n\n\nfunction addNote() {\n  const noteObject = {\n    id: Math.floor(Math.random() * 100000),\n    content: \"\"\n  };\n  const noteRef = notesRef.child(noteObject.id);\n  noteRef.set(noteObject);\n  const noteElement = createNoteElement(noteObject.id, noteObject.content);\n  notesContainer.insertBefore(noteElement, addNoteButt);\n}\n\n//# sourceURL=webpack://notess/./src/index.js?");
 
 /***/ }),
 
@@ -187,75 +187,6 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 	}
 /******/ 	
 /************************************************************************/
-/******/ 	/* webpack/runtime/async module */
-/******/ 	(() => {
-/******/ 		var webpackQueues = typeof Symbol === "function" ? Symbol("webpack queues") : "__webpack_queues__";
-/******/ 		var webpackExports = typeof Symbol === "function" ? Symbol("webpack exports") : "__webpack_exports__";
-/******/ 		var webpackError = typeof Symbol === "function" ? Symbol("webpack error") : "__webpack_error__";
-/******/ 		var resolveQueue = (queue) => {
-/******/ 			if(queue && !queue.d) {
-/******/ 				queue.d = 1;
-/******/ 				queue.forEach((fn) => (fn.r--));
-/******/ 				queue.forEach((fn) => (fn.r-- ? fn.r++ : fn()));
-/******/ 			}
-/******/ 		}
-/******/ 		var wrapDeps = (deps) => (deps.map((dep) => {
-/******/ 			if(dep !== null && typeof dep === "object") {
-/******/ 				if(dep[webpackQueues]) return dep;
-/******/ 				if(dep.then) {
-/******/ 					var queue = [];
-/******/ 					queue.d = 0;
-/******/ 					dep.then((r) => {
-/******/ 						obj[webpackExports] = r;
-/******/ 						resolveQueue(queue);
-/******/ 					}, (e) => {
-/******/ 						obj[webpackError] = e;
-/******/ 						resolveQueue(queue);
-/******/ 					});
-/******/ 					var obj = {};
-/******/ 					obj[webpackQueues] = (fn) => (fn(queue));
-/******/ 					return obj;
-/******/ 				}
-/******/ 			}
-/******/ 			var ret = {};
-/******/ 			ret[webpackQueues] = x => {};
-/******/ 			ret[webpackExports] = dep;
-/******/ 			return ret;
-/******/ 		}));
-/******/ 		__webpack_require__.a = (module, body, hasAwait) => {
-/******/ 			var queue;
-/******/ 			hasAwait && ((queue = []).d = 1);
-/******/ 			var depQueues = new Set();
-/******/ 			var exports = module.exports;
-/******/ 			var currentDeps;
-/******/ 			var outerResolve;
-/******/ 			var reject;
-/******/ 			var promise = new Promise((resolve, rej) => {
-/******/ 				reject = rej;
-/******/ 				outerResolve = resolve;
-/******/ 			});
-/******/ 			promise[webpackExports] = exports;
-/******/ 			promise[webpackQueues] = (fn) => (queue && fn(queue), depQueues.forEach(fn), promise["catch"](x => {}));
-/******/ 			module.exports = promise;
-/******/ 			body((deps) => {
-/******/ 				currentDeps = wrapDeps(deps);
-/******/ 				var fn;
-/******/ 				var getResult = () => (currentDeps.map((d) => {
-/******/ 					if(d[webpackError]) throw d[webpackError];
-/******/ 					return d[webpackExports];
-/******/ 				}))
-/******/ 				var promise = new Promise((resolve) => {
-/******/ 					fn = () => (resolve(getResult));
-/******/ 					fn.r = 0;
-/******/ 					var fnQueue = (q) => (q !== queue && !depQueues.has(q) && (depQueues.add(q), q && !q.d && (fn.r++, q.push(fn))));
-/******/ 					currentDeps.map((dep) => (dep[webpackQueues](fnQueue)));
-/******/ 				});
-/******/ 				return fn.r ? promise : getResult();
-/******/ 			}, (err) => ((err ? reject(promise[webpackError] = err) : outerResolve(exports)), resolveQueue(queue)));
-/******/ 			queue && (queue.d = 0);
-/******/ 		};
-/******/ 	})();
-/******/ 	
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
 /******/ 		// define getter functions for harmony exports

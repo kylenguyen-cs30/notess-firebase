@@ -33,31 +33,6 @@ const signupForm = document.querySelector('.signup');
 submitButton.addEventListener('click', addNewUser);
 
 
-// async function addNewUser(e) {
-//     e.preventDefault();
-//     console.log("button is clicked");
-
-//     const email = document.getElementById('inputEmail').value;
-//     const password = document.getElementById('inputPassword').value;
-
-//     createUserWithEmailAndPassword(auth, email, password)
-//         .then((userCredential) => {
-//             // Signed in 
-//             const user = userCredential.user;
-//             console.log('user created:', user);
-//             signupForm.reset();
-//             window.location.replace("index.html");
-//             // ...
-//         })
-//         .catch((error) => {
-//             const errorCode = error.code;
-//             const errorMessage = error.message;
-//             console.log(errorCode, errorMessage);
-//             // ..
-//         });
-// }
-
-
 async function addNewUser(e) {
     e.preventDefault();
     console.log("button is clicked");

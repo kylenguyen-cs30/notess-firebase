@@ -1,19 +1,19 @@
 
 import { initializeApp } from "firebase/app";
 import {
-    getFirestore, collection, addDoc, getDocs
+  getFirestore, collection, addDoc, getDocs
 } from "firebase/firestore";
-import{
-    getAuth
+import {
+  getAuth
 } from "firebase/auth";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyANBu3OWFN0Vd6kT57K2IYyNH-zb1JaZ7Q",
-    authDomain: "notess-v2.firebaseapp.com",
-    projectId: "notess-v2",
-    storageBucket: "notess-v2.appspot.com",
-    messagingSenderId: "999128000486",
-    appId: "1:999128000486:web:91b7bf69f81d0b7fa65827"
+  apiKey: "AIzaSyANBu3OWFN0Vd6kT57K2IYyNH-zb1JaZ7Q",
+  authDomain: "notess-v2.firebaseapp.com",
+  projectId: "notess-v2",
+  storageBucket: "notess-v2.appspot.com",
+  messagingSenderId: "999128000486",
+  appId: "1:999128000486:web:91b7bf69f81d0b7fa65827"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -22,26 +22,23 @@ const auth = getAuth(app);
 //welcome message
 const user = auth.currentUser;
 
-if (user) {
-    // User is signed in.
+
+auth.onAuthStateChanged(async (user) => {
+  if (user) {
     console.log("user is signed in");
     const userId = user.uid;
     const userRef = collection(db, "users");
     const querySnapshot = await getDocs(userRef);
     const users = querySnapshot.docs.map((doc) => doc.data());
-    const userName = userData?.user_name ?? '';
+    const userEmail = user.email ?? "";
 
-
-    //Insert the user name into the welcome message
+    // Insert the user email into the welcome message
     const userNameElement = document.getElementById("user-name");
-    userNameElement.innerText = ' ${userName?? ""}';
-
-}
-
-
-
-
-
+    userNameElement.innerText = ` ${userEmail}`;
+  } else {
+    console.log("user is not signed in");
+  }
+});
 
 
 
@@ -53,7 +50,7 @@ const input = document.getElementById("search_input");
 input.addEventListener("input", () => searchFor(input));
 addNoteButt.addEventListener("click", () => addNote());
 
-
+//This is the path to the database
 function searchFor(input) {
   const searchQuery = input.value.toLowerCase();
   notesRef.once("value", (snapshot) => {
@@ -77,10 +74,10 @@ function displayNotes(notes) {
 
 
 //This loads in the notes from Firebase
-notesRef.on("value", (snapshot) => {
-  const notes = snapshot.val();
-  displayNotes(notes);
-});
+// notesRef.on("value", (snapshot) => {
+//   const notes = snapshot.val();
+//   displayNotes(notes);
+// });
 
 
 function createNoteElement(id, content) {
