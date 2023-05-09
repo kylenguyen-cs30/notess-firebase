@@ -10,7 +10,7 @@ import {
     setDoc
  } from "firebase/firestore";
 
-
+//FIREBASE CONFIG
 const firebaseConfig = {
     apiKey: "AIzaSyANBu3OWFN0Vd6kT57K2IYyNH-zb1JaZ7Q",
     authDomain: "notess-v2.firebaseapp.com",
